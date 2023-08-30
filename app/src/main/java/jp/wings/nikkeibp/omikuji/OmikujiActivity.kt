@@ -1,6 +1,7 @@
 package jp.wings.nikkeibp.omikuji
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import jp.wings.nikkeibp.omikuji.databinding.FortuneBinding
@@ -89,5 +90,14 @@ class OmikujiActivity : AppCompatActivity() {
         // 画像とテキストを変更する
         fortuneBinding.imageView2.setImageResource(op.drawID)
         fortuneBinding.textView3.setText(op.fortuneID)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action == MotionEvent.ACTION_DOWN){
+            if (omikujiNumber < 0 && omikujiBox.finish) {
+                drawResult()
+            }
+        }
+        return super.onTouchEvent(event)
     }
 }
