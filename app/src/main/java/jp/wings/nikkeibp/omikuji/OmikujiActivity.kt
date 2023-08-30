@@ -7,9 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.RotateAnimation
 import android.view.animation.TranslateAnimation
-import jp.wings.nikkeibp.omikuji.databinding.MainBinding
 import jp.wings.nikkeibp.omikuji.databinding.OmikujiBinding
-import java.util.*
 
 class OmikujiActivity : AppCompatActivity() {
     lateinit var binding: OmikujiBinding
@@ -35,7 +33,7 @@ class OmikujiActivity : AppCompatActivity() {
 */
     }
 
-    fun onButtonClick(v:View){
+    public final fun onButtonClick(v:View){
         val translate = TranslateAnimation(0f, 0f, 0f, -200f)
         translate.repeatMode = Animation.REVERSE
         translate.repeatCount = 5
