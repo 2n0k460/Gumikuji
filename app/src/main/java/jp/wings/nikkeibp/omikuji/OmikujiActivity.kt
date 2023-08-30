@@ -3,13 +3,16 @@ package jp.wings.nikkeibp.omikuji
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import jp.wings.nikkeibp.omikuji.databinding.MainBinding
+import jp.wings.nikkeibp.omikuji.databinding.OmikujiBinding
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: OmikujiBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = MainBinding.inflate(layoutInflater)
+        binding = OmikujiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+/*
         // くじ番号の取得
         val rnd = Random()
         val number = rnd.nextInt(20)
@@ -23,5 +26,6 @@ class MainActivity : AppCompatActivity() {
         val str = gumikujiShelf[number]
         
         binding.hellowView.text = str
+*/
     }
 }
