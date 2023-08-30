@@ -11,9 +11,15 @@ class MainActivity : AppCompatActivity() {
         val binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // 文字を表示する
-        val str = "大吉"
+        var str = "大吉"
         val rnd = Random()
         val number = rnd.nextInt(3)
-        binding.hellowView.text = "$str 乱数 ${number + 1}"
+        if (number == 0) {
+            str = "吉"
+        }
+        else if (number == 1) {
+            str = "凶"
+        }
+        binding.hellowView.text = str
     }
 }
