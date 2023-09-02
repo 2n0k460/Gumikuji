@@ -1,6 +1,7 @@
 package jp.wings.nikkeibp.omikuji
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -90,6 +91,11 @@ class OmikujiActivity : AppCompatActivity() {
         // 画像とテキストを変更する
         fortuneBinding.imageView2.setImageResource(op.drawID)
         fortuneBinding.textView3.setText(op.fortuneID)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
