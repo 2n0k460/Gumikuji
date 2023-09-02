@@ -1,5 +1,6 @@
 package jp.wings.nikkeibp.omikuji
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -96,7 +97,14 @@ class OmikujiActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*
         val toast = Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()
+        return super.onOptionsItemSelected(item)
+     */
+        if (item.itemId == R.id.item1) {
+            val intent = Intent(this, OmikujiPreferenceActivity::class.java)
+            startActivity(intent)
+        }
         return super.onOptionsItemSelected(item)
     }
 
