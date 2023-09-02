@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import jp.wings.nikkeibp.omikuji.databinding.FortuneBinding
 import jp.wings.nikkeibp.omikuji.databinding.OmikujiBinding
 
@@ -27,6 +28,11 @@ class OmikujiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = OmikujiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val value = pref.getBoolean("button", false)
+
+        binding.button.visibility = if (value) View.VISIBLE else View.INVISIBLE
 
         omikujiBox.omikujiView = binding.imageView
 
