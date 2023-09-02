@@ -2,8 +2,10 @@ package jp.wings.nikkeibp.omikuji
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import jp.wings.nikkeibp.omikuji.databinding.FortuneBinding
 import jp.wings.nikkeibp.omikuji.databinding.OmikujiBinding
@@ -91,6 +93,11 @@ class OmikujiActivity : AppCompatActivity() {
         // 画像とテキストを変更する
         fortuneBinding.imageView2.setImageResource(op.drawID)
         fortuneBinding.textView3.setText(op.fortuneID)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val toast = Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
