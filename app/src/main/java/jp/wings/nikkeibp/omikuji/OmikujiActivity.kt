@@ -111,6 +111,10 @@ class OmikujiActivity : AppCompatActivity() {
             val intent = Intent(this, OmikujiPreferenceActivity::class.java)
             startActivity(intent)
         }
+        else {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
         return super.onOptionsItemSelected(item)
     }
 
