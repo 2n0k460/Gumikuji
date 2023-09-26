@@ -1,6 +1,11 @@
 package jp.wings.nikkeibp.omikuji
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,7 +17,9 @@ import androidx.preference.PreferenceManager
 import jp.wings.nikkeibp.omikuji.databinding.FortuneBinding
 import jp.wings.nikkeibp.omikuji.databinding.OmikujiBinding
 
-class OmikujiActivity : AppCompatActivity() {
+class OmikujiActivity : AppCompatActivity(), SensorEventListener {
+
+    lateinit var manager: SensorManager
 
     // おみくじ棚の配列
     val omikujiShelf = Array<OmikujiParts>(20)
@@ -28,6 +35,8 @@ class OmikujiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = OmikujiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        manager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         val value = pref.getBoolean("button", false)
@@ -62,6 +71,18 @@ class OmikujiActivity : AppCompatActivity() {
 
         binding.hellowView.text = str
 */
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        manager.unregisterListener(this)
     }
 
     fun onButtonClick(v:View){
@@ -118,6 +139,10 @@ class OmikujiActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun closeContextMenu() {
+        super.closeContextMenu()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -130,5 +155,16 @@ class OmikujiActivity : AppCompatActivity() {
             }
         }
         return super.onTouchEvent(event)
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        val value = event?.values?.get(0)
+        if (value != null && 10 < value) {
+            Toast.makeText(this, "加速度：${value}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        TODO("not implemented")
     }
 }
