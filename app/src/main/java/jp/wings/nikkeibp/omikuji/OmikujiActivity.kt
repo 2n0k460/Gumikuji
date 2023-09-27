@@ -158,11 +158,20 @@ class OmikujiActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
+
+        if (omikujiBox.chkShake(event)){
+            if (omikujiNumber < 0) {
+                omikujiBox.shake()
+            }
+        }
+/*
         val value = event?.values?.get(0)
         if (value != null && 10 < value) {
             Toast.makeText(this, "加速度：${value}", Toast.LENGTH_LONG).show()
         }
+*/
     }
+
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
         TODO("not implemented")
